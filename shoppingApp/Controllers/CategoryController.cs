@@ -2,6 +2,7 @@
 using ShoppingApp.Data;
 using ShoppingApp.Models;
 
+
 namespace ShoppingApp.Controllers
 {
     public class CategoryController : Controller
@@ -15,6 +16,26 @@ namespace ShoppingApp.Controllers
         {
           List<Category>objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
+        }
+         public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            if(obj.Name==obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Name", "The name and display order can't be same");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
