@@ -65,7 +65,6 @@ namespace ShoppingApp.Controllers
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
                 TempData["Success"] = "Category updated successfully";
-
                 return RedirectToAction("Index");
             }
             return View();
@@ -95,7 +94,9 @@ namespace ShoppingApp.Controllers
             }
                  _db.Categories.Remove(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Index");           
+            TempData["Success"] = "Category is Deleted ";
+
+            return RedirectToAction("Index");           
                  }
     }
 }

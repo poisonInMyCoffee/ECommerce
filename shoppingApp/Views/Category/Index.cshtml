@@ -1,6 +1,10 @@
 ﻿@using ShoppingApp.Models
 @model List<Category>
 
+@if (TempData["Success"]!= null)
+{
+    <h2>TempData["Success"]</h2>
+}
 <div class="container">
 <div class="row pt-4 pb-3">
     <div class="col-6">
