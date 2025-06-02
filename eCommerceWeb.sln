@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingApp", "shoppingApp\ShoppingApp.csproj", "{3E4178C3-D6F1-4CD6-B35B-14CBA5D17AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shoppingAppRazor_temp", "shoppingAppRazor_temp\shoppingAppRazor_temp.csproj", "{DC8538B4-DDDC-4FF1-BD01-B180BE5A3670}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3E4178C3-D6F1-4CD6-B35B-14CBA5D17AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E4178C3-D6F1-4CD6-B35B-14CBA5D17AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E4178C3-D6F1-4CD6-B35B-14CBA5D17AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8538B4-DDDC-4FF1-BD01-B180BE5A3670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8538B4-DDDC-4FF1-BD01-B180BE5A3670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8538B4-DDDC-4FF1-BD01-B180BE5A3670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8538B4-DDDC-4FF1-BD01-B180BE5A3670}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
