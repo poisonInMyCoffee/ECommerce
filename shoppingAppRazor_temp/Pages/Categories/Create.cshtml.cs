@@ -22,6 +22,7 @@ namespace shoppingAppRazor_temp.Pages.Categories
         {
             _db.Categories.Add(Category); //Passing Category directly here as it will be binded by BindProperty method
             _db.SaveChanges();
+            TempData["Success"] = "Category is created";
             return RedirectToPage("Index");
         }
 

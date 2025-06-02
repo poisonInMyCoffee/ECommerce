@@ -34,6 +34,7 @@ namespace shoppingAppRazor_temp.Pages.Categories
             }
             _db.Categories.Remove(obj);
             _db.SaveChanges();
+            TempData["Success"] = "Category is Deleted ";
             return RedirectToPage("Index");
         }
     }
