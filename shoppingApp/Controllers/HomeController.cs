@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using shoppingApp.Models;
+using ShoppingApp.Models;
 
 namespace shoppingApp.Controllers
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShoppingApp.Data;
+using ShoppingApp.DataAccess.Data;
 using ShoppingApp.Models;
 
 

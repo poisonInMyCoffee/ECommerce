@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingApp.Models;
 
-namespace ShoppingApp.Data
+namespace ShoppingApp.DataAccess.Data
 {
     public class ApplicationDbContext:DbContext
     {

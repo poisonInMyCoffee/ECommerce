@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShoppingApp.Data;
+using ShoppingApp.DataAccess.Data;
+
 
 #nullable disable
 
-namespace ShoppingApp.Migrations
+namespace ShoppingApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250529070800_addCategorytableToDb")]
