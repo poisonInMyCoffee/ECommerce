@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingApp.DataAccess.Data;
+using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
 
 
@@ -7,14 +8,14 @@ namespace ShoppingApp.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db) //Since it's mentioned in program.cs then we can call it here as argument
+        private readonly IUnitOfWork _UnitOfWork;
+        public CategoryController(IUnitOfWork UnitOfWork) //Since it's mentioned in program.cs then we can call it here as argument
         {
-            _db = db;
+            _UnitOfWork = UnitOfWork;
         }
         public IActionResult Index()
         {
-          List<Category>objCategoryList = _db.Categories.ToList();
+          List<Category>objCategoryList = _UnitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
          public IActionResult Create()
@@ -31,8 +32,8 @@ namespace ShoppingApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _UnitOfWork.Category.Add(obj);
+                _UnitOfWork.Save();
                 TempData["Success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
@@ -44,7 +45,7 @@ namespace ShoppingApp.Controllers
             {
                 return NotFound();
             }
-            Category? CategoryFromDb = _db.Categories.Find(Id);
+            Category? CategoryFromDb = _UnitOfWork.Category.Get(u=>u.Id==Id);
             //Category? CategoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==Id);           DIFFERENT WAYS TO RETRIEVE DATA FROM DB(PREFERRABLE IS 2ND ONE)
             //Category? CategoryFromDb2 = _db.Categories.Where(u=>u.Id==Id).FirstOrDefault();
 
@@ -62,8 +63,8 @@ namespace ShoppingApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _UnitOfWork.Category.Add(obj);
+                _UnitOfWork.Save();
                 TempData["Success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
@@ -75,7 +76,7 @@ namespace ShoppingApp.Controllers
             {
                 return NotFound();
             }
-            Category? CategoryFromDb = _db.Categories.Find(Id);
+            Category? CategoryFromDb = _UnitOfWork.Category.Get(u=>u.Id==Id);
 
             if (CategoryFromDb == null)
             {
@@ -86,14 +87,14 @@ namespace ShoppingApp.Controllers
         [HttpPost,ActionName("Delete")]
         public IActionResult DeletePOST(int? Id)
         {
-            Category? obj = _db.Categories.Find(Id);
+            Category? obj = _UnitOfWork.Category.Get(u => u.Id == Id);
 
             if (obj == null)
             {
                 return NotFound();
             }
-                 _db.Categories.Remove(obj);
-                _db.SaveChanges();
+            _UnitOfWork.Category.Remove(obj);
+            _UnitOfWork.Save();
             TempData["Success"] = "Category is Deleted ";
 
             return RedirectToAction("Index");           
