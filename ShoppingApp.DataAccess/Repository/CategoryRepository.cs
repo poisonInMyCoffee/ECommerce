@@ -1,4 +1,5 @@
-﻿using ShoppingApp.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingApp.DataAccess.Data;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
 using System;
@@ -19,7 +20,7 @@ namespace ShoppingApp.DataAccess.Repository
             _db = db;
         }
       
-        public void Update(Category obj)
+        public new void Update(Category obj) //Keep this update in mind
         {
             _db.Categories.Update(obj);
         }

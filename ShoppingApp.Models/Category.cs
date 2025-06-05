@@ -7,10 +7,10 @@ namespace ShoppingApp.Models
     {
         [Key]
         public int Id { get; set; }
+
         [DisplayName("Category Name")]
         [MaxLength(30)]
-        [Required]
-        
+        [Required]        
         public string Name { get; set; }
 
         [DisplayName("Display Order")]
