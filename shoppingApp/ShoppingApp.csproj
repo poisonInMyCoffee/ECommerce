@@ -20,4 +20,8 @@
     <ProjectReference Include="..\ShoppingApp.DataAccess\ShoppingApp.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

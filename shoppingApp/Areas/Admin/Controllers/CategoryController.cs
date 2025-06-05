@@ -4,8 +4,9 @@ using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
 
 
-namespace ShoppingApp.Controllers
+namespace ShoppingApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
