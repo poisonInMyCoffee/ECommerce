@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
 
@@ -16,11 +17,19 @@ namespace ShoppingApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objCategoryList = _unitOfWork.Product.GetAll().ToList();
+
             return View(objCategoryList);
         }
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString(),
+            });
+
+            ViewBag.CategoryList = CategoryList; //Can't send via view as the model its linked to is product, so we send via viewbag 
             return View();
         }
         [HttpPost]
