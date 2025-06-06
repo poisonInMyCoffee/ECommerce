@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
+using ShoppingApp.Models.ViewModels;
 
 namespace ShoppingApp.Areas.Admin.Controllers
 {
@@ -21,19 +22,30 @@ namespace ShoppingApp.Areas.Admin.Controllers
             return View(objCategoryList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? Id) //Update+Insert
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            //ViewBag.CategoryList = CategoryList; //Can't send via view as the model its linked to is product, so we send via viewbag 
+            ProductVM productvm = new ()
+            {
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString(),
-            });
-
-            ViewBag.CategoryList = CategoryList; //Can't send via view as the model its linked to is product, so we send via viewbag 
-            return View();
+            }),
+            Product=new Product()
+            };
+            if (Id == 0 || Id == null)
+            {
+                return View(productvm);
+            }
+            else
+            {
+                productvm.Product = _unitOfWork.Product.Get(u => u.Id == Id);
+            return View(productvm);
+            }
         }
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             //if (obj.Name == obj.DisplayOrder.ToString())
             //{
@@ -42,44 +54,24 @@ namespace ShoppingApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
-
+            else
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+                     return View(productVM);
+            }
+           
         }
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Product? ProductFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-            //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
-            //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
-
-            if (ProductFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(ProductFromDb);
-        }
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Category updated successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
-
-        }
+       
 
         public IActionResult Delete(int? id)
         {
