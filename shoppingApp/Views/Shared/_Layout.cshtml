@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - App</title>
+    <title>@ViewData["Title"] ShoppingApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/shoppingApp.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"  /> @*To add icons/emojis*@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css" /> @* for adding pagination,search functionality *@
+
 </head>
 <body class="d-flex flex-column min-vh-100">
     <header>
@@ -66,7 +68,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdn.tiny.cloud/1/d2t81khj12z2xcaxq549q9hnw3q1b0xdbbpbrhmqtcua84kp/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="//cdn.datatables.net/2.3.2/js/dataTables.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/d2t81khj12z2xcaxq549q9hnw3q1b0xdbbpbrhmqtcua84kp/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> @*To make edit/create page field look more presentable*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
