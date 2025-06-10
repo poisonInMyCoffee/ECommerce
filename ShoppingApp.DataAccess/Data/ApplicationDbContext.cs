@@ -12,6 +12,7 @@ namespace ShoppingApp.DataAccess.Data
         }
         public DbSet<Category> Categories  { get; set; } //Table name Categories from model Category
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
