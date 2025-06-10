@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ShoppingApp.DataAccess.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options) :base(options)  //Whatever options we configure here will be passed to the base class of DbContext
         {
@@ -14,6 +15,8 @@ namespace ShoppingApp.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id=1,Name="Action", DisplayOrder=1},
                 new Category { Id=2,Name="Sci-fi", DisplayOrder=2},
