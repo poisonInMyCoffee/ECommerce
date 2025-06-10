@@ -4,6 +4,8 @@ using ShoppingApp.DataAccess.Data;
 using ShoppingApp.DataAccess.Repository;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp;
+using ShoppingApp.Utilities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +16,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //This line establishes connection between Ef Core and SQL Server Database
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>(); //soo that we can go ahead with any email id, even if it doesn't exist
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>(); //soo that we can go ahead with any email id, even if it doesn't exist
 builder.Services.AddRazorPages();
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
  
