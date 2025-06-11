@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
 using ShoppingApp.Utilities;
 
@@ -34,6 +35,7 @@ namespace ShoppingApp.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _unitOfWork;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -41,8 +43,10 @@ namespace ShoppingApp.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork unitOFWork)
         {
+            _unitOfWork = unitOFWork;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -116,6 +120,9 @@ namespace ShoppingApp.Areas.Identity.Pages.Account
             public string? State { get; set; }
             public string? PostalCode { get; set; }
             public string? PhoneNumber { get; set; }
+                public int? CompanyId { get; set;}
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
         }
 
 
@@ -131,10 +138,15 @@ namespace ShoppingApp.Areas.Identity.Pages.Account
 
             Input = new()
             {
-                RoleList = _roleManager.Roles.Select(u => u.Name).Select(v => new SelectListItem        
+                RoleList = _roleManager.Roles.Select(u => u.Name).Select(v => new SelectListItem
                 {
                     Text = v,
                     Value = v
+                }),
+                CompanyList = _unitOfWork.Company.GetAll().Select(v => new SelectListItem
+                {
+                    Text = v.Name,
+                    Value = v.Id.ToString()
                 })
             };
             ReturnUrl = returnUrl;

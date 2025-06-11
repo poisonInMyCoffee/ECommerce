@@ -13,13 +13,7 @@ function loadDataTable() {
             { data: 'city', "width": "15%" },
             { data: 'state', "width": "15%" },
             { data: 'phoneNumber', "width": "15%" },
-            {
-                data: 'category.name',
-                render: function (data, type, row) {
-                    return row.category ? row.category.name : 'N/A';
-                },
-                width: "10%"
-            },
+          
             {
                 data: 'id', 
                 "render": function (data) {
