@@ -16,12 +16,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //This line establishes connection between Ef Core and SQL Server Database
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>(); //soo that we can go ahead with any email id, even if it doesn't exist
+//Adds user along with the identity
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders(); //soo that we can go ahead with any email id, even if it doesn't exist
+
 builder.Services.ConfigureApplicationCookie(options => {
     options.LoginPath = $"/Identity/Account/LogIn";
     options.LogoutPath = $"/Identity/Account/LogOut";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-});
+}); //to view access denied when you you visiting restricted url
 builder.Services.AddRazorPages();
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
