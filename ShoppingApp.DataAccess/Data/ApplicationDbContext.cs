@@ -25,8 +25,54 @@ namespace ShoppingApp.DataAccess.Data
                 new Category { Id=3,Name="History", DisplayOrder=3},
                 new Category { Id=4,Name="Fiction", DisplayOrder=4}
                 );
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = 1,
+                    Name = "Tech Solutions",
+                    StreetAddress = "123 Street",
+                    City = "Boston",
+                    PostalCode = "123123",
+                    State = "UP",
+                    PhoneNumber = "1341231432"
 
-            modelBuilder.Entity<Product>().HasData(
+                },
+                  new Company
+                  {
+                      Id = 2,
+                      Name = "Tech2 Solutions",
+                      StreetAddress = "123 Street",
+                      City = "Boston",
+                      PostalCode = "123123",
+                      State = "UP",
+                      PhoneNumber = "1341231432"
+
+                  },
+                      new Company
+                      {
+                          Id = 3,
+                          Name = "Tech3 Solutions",
+                          StreetAddress = "123 Street",
+                          City = "Boston",
+                          PostalCode = "123123",
+                          State = "UP",
+                          PhoneNumber = "1341231432"
+
+                
+                      },
+                          new Company
+                          {
+                              Id = 4,
+                              Name = "Tech4 Solutions",
+                              StreetAddress = "123 Street",
+                              City = "Boston",
+                              PostalCode = "123123",
+                              State = "UP",
+                              PhoneNumber = "1341231432"
+
+                          });
+
+                          modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
                     Id = 1,
