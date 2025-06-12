@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 namespace ShoppingApp.DataAccess.Repository.IRepository
 {
     public interface IApplicationUserRepository:IRepository<ApplicationUser>
-    {  
+    {   
     }
 }

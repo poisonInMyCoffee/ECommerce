@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
@@ -25,12 +27,36 @@ namespace ShoppingApp.Areas.Customer.Controllers
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new() {
-                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category");
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category"),
                 Count = 1,
                 ProductId = productId
             };
             
             return View(cart);
+        }
+
+        [HttpPost]
+        [Authorize] //To check whether the person ordering is LoggedIn(authorized) or not
+        public IActionResult Details(ShoppingCart shoppingCart) 
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value; //To find the user Id of the user logged in
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb=_unitOfWork.ShoppingCart.Get(u=>u.ApplicationUserId == userId && u.ProductId==shoppingCart.ProductId);
+            if (cartFromDb != null)
+            {
+                //shopping cart exists
+                cartFromDb.Count += shoppingCart.Count;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            else
+            {
+                //add cart record
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

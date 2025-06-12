@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingApp.DataAccess.Repository
 {
-    public class ApplicationUserRepository : Repository<Category>, ICategoryRepository
+    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
     {
         private ApplicationDbContext _db;
 
