@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.DataAccess.Data;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Models;
@@ -14,13 +14,14 @@ namespace ShoppingApp.DataAccess.Repository
     public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
     {
         private ApplicationDbContext _db;
-
         public ShoppingCartRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-      
-        public new void Update(ShoppingCart obj) //Keep this update in mind
+
+
+
+        public void Update(ShoppingCart obj)
         {
             _db.ShoppingCarts.Update(obj);
         }

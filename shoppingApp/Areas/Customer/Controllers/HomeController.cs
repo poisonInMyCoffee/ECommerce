@@ -55,6 +55,7 @@ namespace ShoppingApp.Areas.Customer.Controllers
                 //add cart record
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
             }
+            TempData["Success"] = "Cart updated successfully";
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }

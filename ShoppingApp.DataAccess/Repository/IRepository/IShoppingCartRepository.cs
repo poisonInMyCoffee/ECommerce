@@ -1,4 +1,5 @@
-﻿using ShoppingApp.Models;
+﻿using ShoppingApp.DataAccess.Repository.IRepository;
+using ShoppingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
