@@ -26,7 +26,7 @@ namespace ShoppingApp.Areas.Customer.Controllers
         {
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;// to get the user identity(ID)
 
             ShoppingCartVM = new()
             {
@@ -47,7 +47,7 @@ namespace ShoppingApp.Areas.Customer.Controllers
         public IActionResult Summary()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;// to get the user identity(ID)
 
             ShoppingCartVM = new()
             {
@@ -78,7 +78,7 @@ namespace ShoppingApp.Areas.Customer.Controllers
         public IActionResult SummaryPOST()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;// to get the user identity(ID)
 
             ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
                 includeProperties: "Product");
