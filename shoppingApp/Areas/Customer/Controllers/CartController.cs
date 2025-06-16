@@ -78,7 +78,7 @@ namespace ShoppingApp.Areas.Customer.Controllers
         public IActionResult SummaryPOST()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;// to get the user identity(ID)
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;// to get the user identity(ID)  
 
             ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
                 includeProperties: "Product");
