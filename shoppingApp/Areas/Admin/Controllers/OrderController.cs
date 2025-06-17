@@ -20,30 +20,16 @@ namespace ShoppingApp.Areas.Admin.Controllers
         }
         #region API Calls
         [HttpGet]
+
         public IActionResult GetAll()
         {
+            Console.WriteLine("GetAll() API called");
+
             List<OrderHeader> objOrderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser").ToList();
             return Json(new { data = objOrderHeaders });
         }
 
-        //[HttpDelete]
-        //public IActionResult Delete(int? Id)
-        //{
-        //    var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == Id);
-        //    if (productToBeDeleted == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
-        //    var oldImagePath = Path.Combine(IWebHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
-        //    if (System.IO.File.Exists(oldImagePath))
-        //    {
-        //        System.IO.File.Delete(oldImagePath);
-        //    }
-        //    _unitOfWork.Product.Remove(productToBeDeleted);
-        //    _unitOfWork.Save();
-
-        //    return Json(new { success = true, message = "deleted successful" });
-        //}
+      
 
         #endregion
     }

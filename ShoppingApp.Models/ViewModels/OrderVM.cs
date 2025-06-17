@@ -8,7 +8,7 @@ namespace ShoppingApp.Models.ViewModels
 {
     public class OrderVM
     {
-        public OrderHeader orderHeader {  get; set; }
+        public OrderHeader OrderHeader {  get; set; }
         public IEnumerable<OrderDetail> OrderDetail { get; set; }
     }
 }
