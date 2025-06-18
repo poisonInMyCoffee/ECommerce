@@ -24,8 +24,9 @@ namespace ShoppingApp.Models
         public string? PaymentStatus {  get; set; }
         public string? TrackingNumber {  get; set; }
         public string? Carrier {  get; set; }
-        public DateTime Paymentdate {  get; set; }
+        public DateTime PaymentDate {  get; set; }
         public DateOnly PaymentDueDate {  get; set; } //feature by efcore which gives only date/only time as data
+        public string? SessionId { get; set; }
         public string? PaymentIntentId {  get; set; }
         [Required]
         public string? Name { get; set; }
