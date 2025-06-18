@@ -79,6 +79,7 @@ namespace ShoppingApp.Areas.Admin.Controllers
             TempData["Success"] = "Order Details Updated Successfully.";
             return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
         }
+        
 
         [HttpPost]
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
@@ -201,11 +202,10 @@ namespace ShoppingApp.Areas.Admin.Controllers
 
         //    return View(orderHeaderId);
         //}
-
+    
 
         #region API Calls
         [HttpGet]
-
 
         public IActionResult GetAll(string status)
         {
