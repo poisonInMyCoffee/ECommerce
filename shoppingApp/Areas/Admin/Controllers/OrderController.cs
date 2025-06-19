@@ -114,7 +114,13 @@ namespace ShoppingApp.Areas.Admin.Controllers
             }
 
         [HttpPost]
-        public IActionResult PayNow() {
+        public IActionResult PayNow()
+        {
+            OrderVM.OrderHeader = _unitOfWork.OrderHeader
+                .Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
+            OrderVM.OrderDetail = _unitOfWork.OrderDetail
+                .GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
+
             return View();
         }
 
@@ -122,10 +128,10 @@ namespace ShoppingApp.Areas.Admin.Controllers
         //[HttpPost]
         //public IActionResult Details_PAY_NOW()
         //{
-        //    OrderVM.OrderHeader = _unitOfWork.OrderHeader
-        //        .Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
-        //    OrderVM.OrderDetail = _unitOfWork.OrderDetail
-        //        .GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
+        ////    OrderVM.OrderHeader = _unitOfWork.OrderHeader
+        ////        .Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
+        ////    OrderVM.OrderDetail = _unitOfWork.OrderDetail
+        ////        .GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
 
             //    //stripe logic
             //    var domain = Request.Scheme + "://" + Request.Host.Value + "/";

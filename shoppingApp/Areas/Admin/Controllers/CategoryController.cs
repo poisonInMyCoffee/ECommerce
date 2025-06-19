@@ -9,7 +9,7 @@ using ShoppingApp.Utilities;
 namespace ShoppingApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles=SD.Role_Admin)] //make sure you can't access pages by writing Url if you are not in the same role
+    [Authorize(Roles=SD.Role_Admin)] //make sure you can't access pages by writing Url if you are not in the same role
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
