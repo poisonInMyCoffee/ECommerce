@@ -14,7 +14,9 @@ $(document).ready(function () {
                 loadDataTable("pending");
             }
             else {
-                if (url.includes("approved")) {
+                if (url.includes("approved"))
+                {
+                    loadDataTable("approved");
                 }
                 else {
                     loadDataTable("all");

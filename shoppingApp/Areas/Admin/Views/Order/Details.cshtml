@@ -140,7 +140,7 @@
                             </div>
 
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
-                                <div class="row my-1">
+                                <div class="row  my-1">
                                     <div class="col-3">Session ID</div>
                                     <div class="col-9">
 
@@ -220,7 +220,7 @@
 
                            @if (Model.OrderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment &&
                             Model.OrderHeader.OrderStatus == SD.StatusShipped) {
-                                <button type="submit" class="btn btn-success form-control my-1">Pay Now</button>
+                                <button type="submit" asp-action="PayNow" class="btn btn-success form-control my-1">Pay Now</button>
                             }
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee)) {
                                 @if (Model.OrderHeader.OrderStatus == SD.StatusApproved) {
