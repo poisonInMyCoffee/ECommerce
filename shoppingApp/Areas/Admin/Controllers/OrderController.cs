@@ -113,7 +113,10 @@ namespace ShoppingApp.Areas.Admin.Controllers
 
             }
 
-        public IActions
+        [HttpPost]
+        public IActionResult PayNow() {
+            return View();
+        }
 
         //[ActionName("Details")]
         //[HttpPost]
