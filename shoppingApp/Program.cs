@@ -30,6 +30,12 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 }); //to view access denied when you you visiting restricted url
 
+builder.Services.AddAuthentication().AddFacebook(option =>
+{
+    option.AppId = "2511509435875644";
+    option.AppSecret = "9e75d2f393a83775102271767cbeb357";
+});
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
