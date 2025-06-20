@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ShoppingApp;
 using ShoppingApp.DataAccess.Data;
+using ShoppingApp.DataAccess.DbInitializer;
 using ShoppingApp.DataAccess.Repository;
 using ShoppingApp.DataAccess.Repository.IRepository;
 using ShoppingApp.Utilities;
@@ -46,7 +47,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
+builder.Services.AddScoped<IDbInitializer, IDbInitializer>();
 builder.Services.AddRazorPages();
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -71,9 +72,19 @@ app.UseRouting();
 app.UseAuthentication(); //if username and password is valid
 app.UseAuthorization();
 app.UseSession();
+Seeddatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void Seeddatabase()
+{
+    using(var scope = app.Services.CreateScope())
+    {
+        var DbInitializer=scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        DbInitializer.Initialize();
+    }
+}
